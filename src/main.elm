@@ -1,6 +1,7 @@
 import Browser
 import Html exposing (..)
-import Html.Events exposing (onClick)
+import Html.Events exposing (onClick, onInput)
+import Html.Attributes exposing (..)
 
 main =
   Browser.sandbox { init = init, update = update, view = view }
@@ -30,7 +31,10 @@ init =
 
 -- UPDATE
 
-type Msg = CalcuWeight | Reset
+type Msg 
+  = CalcuWeight 
+  | Reset
+  | Input String
 
 update : Msg -> Model -> Model
 update msg model =
@@ -40,7 +44,9 @@ update msg model =
 
     CalcuWeight ->
       { model | workWeight = model.workWeight + 5 }
-    
+
+    Input weight ->
+      { model | workWeight = String.toInt weight |> Maybe.withDefault 45 }
     
 
 
@@ -49,7 +55,12 @@ update msg model =
 view : Model -> Html Msg
 view model = 
     div []
-    [ div [] [ text (String.fromInt model.workWeight) ]
+    [ div [] [ text "Warmup 1:\t", text ( String.fromInt model.warmup1 ) ]  
+    , div [] [ text "Warmup 2:\t", text ( String.fromInt model.warmup2 ) ]  
+    , div [] [ text "Warmup 3:\t", text ( String.fromInt model.warmup3 ) ]  
+    , div [] [ text "Warmup 4:\t", text ( String.fromInt model.warmup4 ) ]  
+    , div [] [ text "Warmup 5:\t", text ( String.fromInt model.warmup5 ) ]  
+    , input  [ value (String.fromInt model.workWeight), onInput Input] []
     , button [ onClick CalcuWeight ] [ text "CalcuWeight!" ]
     , button [ onClick Reset ] [ text "GG"]
     ]
