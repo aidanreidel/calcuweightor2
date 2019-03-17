@@ -46,13 +46,12 @@ view model =
 
 viewValidation : Model -> Html msg
 viewValidation model = 
-  if String.toInt( model.workWeight ) == Nothing then
-    div [style "color" "red" ] [ text "Work weight must be a number"]
-  else 
-    div [] 
-    [ div [] [ text "Warmup 1:\t", text model.workWeight  ]
-    , div [] [ text "Warmup 2:\t", text model.workWeight  ]
-    , div [] [ text "Warmup 3:\t", text model.workWeight  ]
-    , div [] [ text "Warmup 4:\t", text model.workWeight  ]
-    , div [] [ text "Warmup 5:\t", text model.workWeight  ]
-    ]
+  case String.toInt( model.workWeight ) of
+    Nothing -> 
+      div [style "color" "red" ] [ text "Work weight must be a number"]
+    
+    Just weight ->
+      if weight < 45 then 
+        div [style "color" "red" ] [ text "Work weight must be at least 45"]
+      else 
+        div [] [ text "Work Weight:\t", text ( String.fromInt weight ) ]
