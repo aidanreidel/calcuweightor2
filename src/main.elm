@@ -18,13 +18,11 @@ init =
   }
 
 
-
 -- UPDATE
 
 type Msg 
   = Reset
   | Input String
---  | CalcuWeight
 
 update : Msg -> Model -> Model
 update msg model =
@@ -32,12 +30,8 @@ update msg model =
     Reset -> 
       init
 
---    CalcuWeight ->
---      { model | workWeight = model.workWeight + 5 }
-
     Input weight ->
       { model | workWeight = weight }
-    
 
 
 -- VIEW
@@ -46,7 +40,6 @@ view : Model -> Html Msg
 view model = 
     div []
     [ input  [ value model.workWeight, onInput Input] []
---    , button [ onClick CalcuWeight ] [ text "CalcuWeight!" ]
     , button [ onClick Reset ] [ text "GG"]
     , viewValidation model
     ]
