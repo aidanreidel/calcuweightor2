@@ -54,4 +54,25 @@ viewValidation model =
       if weight < 45 then 
         div [style "color" "red" ] [ text "Work weight must be at least 45"]
       else 
-        div [] [ text "Work Weight:\t", text ( String.fromInt weight ) ]
+        calcuweightWarmups weight
+
+calcuweightWarmups : Int -> Html msg
+calcuweightWarmups weight = 
+  div [ class "container" ] 
+    [ div [ class "warmup" ] [ text "Warm Up 3:\t", text ( String.fromInt ( warmUpWeight weight 1 )) ]
+    , div [ class "warmup" ] [ text "Warm Up 4:\t", text ( String.fromInt ( warmUpWeight weight 2 )) ]
+    , div [ class "warmup" ] [ text "Warm Up 5:\t", text ( String.fromInt ( warmUpWeight weight 3 )) ]
+    , div [ class "workset" ] [ text "Work Sets:\t", text ( String.fromInt weight ) ] ]
+
+warmUpWeight : Int -> Int -> Int
+warmUpWeight x y =
+  round5 ( y * ( ( x - 45 ) // 4 ) + 45 )
+
+round5 : Int -> Int
+round5 x = 
+  if modBy 5 x < 2 then
+    x - ( 5 - ( modBy 5 x ) )
+  else 
+    x + ( 5 - ( modBy 5 x ) )
+
+
