@@ -73,10 +73,36 @@ endsWith2or7 =
 calcuweightWarmups : Float -> Html msg
 calcuweightWarmups weight = 
   div [ class "container" ] 
-    [ div [ class "warmup" ] [ text "Warm Up 3:\t", text ( String.fromInt ( warmUpWeight weight 1 )) ]
-    , div [ class "warmup" ] [ text "Warm Up 4:\t", text ( String.fromInt ( warmUpWeight weight 2 )) ]
-    , div [ class "warmup" ] [ text "Warm Up 5:\t", text ( String.fromInt ( warmUpWeight weight 3 )) ]
-    , div [ class "workset" ] [ text "Work Sets:\t", text ( String.fromFloat weight ) ] ]
+  [ table [] 
+      [ tr []
+{--
+        [ td [] []
+        , td [] [ text "Weight" ]  
+        , td [] [ text "Plates" ]
+        ]
+      , tr []
+--}
+        [ td [] [ text "Warm up 1:"]
+        , td [] [text (String.fromInt ( warmUpWeight weight 1 ) ) ]
+        , td [] []
+        ]
+      , tr []        
+        [ td [] [ text "Warm up 2:"]
+        , td [] [text (String.fromInt ( warmUpWeight weight 2 ) )] 
+        , td [] []
+        ]
+      , tr []        
+        [ td [] [ text "Warm up 3:"]
+        , td [] [text (String.fromInt ( warmUpWeight weight 3 ) )] 
+        , td [] []
+        ]
+      , tr []        
+        [ td [] [ text "Work sets:"]
+        , td [] [text ( String.fromFloat weight )] 
+        , td [] []
+        ]
+      ]
+  ]
 
 warmUpWeight : Float -> Float -> Int
 warmUpWeight x y =

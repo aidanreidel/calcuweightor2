@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <link rel="stylesheet" type="text/css" href="styles.css">	
+	<link rel="stylesheet" type="text/css" href="styles.css">
   <meta charset="UTF-8">
   <title>Main</title>
 </head>
@@ -4835,8 +4835,11 @@ var elm$virtual_dom$VirtualDom$toHandlerInt = function (handler) {
 	}
 };
 var elm$html$Html$div = _VirtualDom_node('div');
+var elm$html$Html$table = _VirtualDom_node('table');
+var elm$html$Html$td = _VirtualDom_node('td');
 var elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var elm$html$Html$text = elm$virtual_dom$VirtualDom$text;
+var elm$html$Html$tr = _VirtualDom_node('tr');
 var elm$json$Json$Encode$string = _Json_wrap;
 var elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -4856,55 +4859,101 @@ var author$project$Main$calcuweightWarmups = function (weight) {
 		_List_fromArray(
 			[
 				A2(
-				elm$html$Html$div,
+				elm$html$Html$table,
+				_List_Nil,
 				_List_fromArray(
 					[
-						elm$html$Html$Attributes$class('warmup')
-					]),
-				_List_fromArray(
-					[
-						elm$html$Html$text('Warm Up 3:\t'),
-						elm$html$Html$text(
-						elm$core$String$fromInt(
-							A2(author$project$Main$warmUpWeight, weight, 1)))
-					])),
-				A2(
-				elm$html$Html$div,
-				_List_fromArray(
-					[
-						elm$html$Html$Attributes$class('warmup')
-					]),
-				_List_fromArray(
-					[
-						elm$html$Html$text('Warm Up 4:\t'),
-						elm$html$Html$text(
-						elm$core$String$fromInt(
-							A2(author$project$Main$warmUpWeight, weight, 2)))
-					])),
-				A2(
-				elm$html$Html$div,
-				_List_fromArray(
-					[
-						elm$html$Html$Attributes$class('warmup')
-					]),
-				_List_fromArray(
-					[
-						elm$html$Html$text('Warm Up 5:\t'),
-						elm$html$Html$text(
-						elm$core$String$fromInt(
-							A2(author$project$Main$warmUpWeight, weight, 3)))
-					])),
-				A2(
-				elm$html$Html$div,
-				_List_fromArray(
-					[
-						elm$html$Html$Attributes$class('workset')
-					]),
-				_List_fromArray(
-					[
-						elm$html$Html$text('Work Sets:\t'),
-						elm$html$Html$text(
-						elm$core$String$fromFloat(weight))
+						A2(
+						elm$html$Html$tr,
+						_List_Nil,
+						_List_fromArray(
+							[
+								A2(
+								elm$html$Html$td,
+								_List_Nil,
+								_List_fromArray(
+									[
+										elm$html$Html$text('Warm up 1:')
+									])),
+								A2(
+								elm$html$Html$td,
+								_List_Nil,
+								_List_fromArray(
+									[
+										elm$html$Html$text(
+										elm$core$String$fromInt(
+											A2(author$project$Main$warmUpWeight, weight, 1)))
+									])),
+								A2(elm$html$Html$td, _List_Nil, _List_Nil)
+							])),
+						A2(
+						elm$html$Html$tr,
+						_List_Nil,
+						_List_fromArray(
+							[
+								A2(
+								elm$html$Html$td,
+								_List_Nil,
+								_List_fromArray(
+									[
+										elm$html$Html$text('Warm up 2:')
+									])),
+								A2(
+								elm$html$Html$td,
+								_List_Nil,
+								_List_fromArray(
+									[
+										elm$html$Html$text(
+										elm$core$String$fromInt(
+											A2(author$project$Main$warmUpWeight, weight, 2)))
+									])),
+								A2(elm$html$Html$td, _List_Nil, _List_Nil)
+							])),
+						A2(
+						elm$html$Html$tr,
+						_List_Nil,
+						_List_fromArray(
+							[
+								A2(
+								elm$html$Html$td,
+								_List_Nil,
+								_List_fromArray(
+									[
+										elm$html$Html$text('Warm up 3:')
+									])),
+								A2(
+								elm$html$Html$td,
+								_List_Nil,
+								_List_fromArray(
+									[
+										elm$html$Html$text(
+										elm$core$String$fromInt(
+											A2(author$project$Main$warmUpWeight, weight, 3)))
+									])),
+								A2(elm$html$Html$td, _List_Nil, _List_Nil)
+							])),
+						A2(
+						elm$html$Html$tr,
+						_List_Nil,
+						_List_fromArray(
+							[
+								A2(
+								elm$html$Html$td,
+								_List_Nil,
+								_List_fromArray(
+									[
+										elm$html$Html$text('Work sets:')
+									])),
+								A2(
+								elm$html$Html$td,
+								_List_Nil,
+								_List_fromArray(
+									[
+										elm$html$Html$text(
+										elm$core$String$fromFloat(weight))
+									])),
+								A2(elm$html$Html$td, _List_Nil, _List_Nil)
+							]))
 					]))
 			]));
 };
