@@ -21,14 +21,11 @@ init =
 -- UPDATE
 
 type Msg 
-  = Reset
-  | Input String
+  = Input String
 
 update : Msg -> Model -> Model
 update msg model =
   case msg of
-    Reset -> 
-      init
 
     Input weight ->
       { model | workWeight = weight }
@@ -39,10 +36,9 @@ update msg model =
 view : Model -> Html Msg
 view model = 
     div []
-    [ div [class "Header"] [h1 [] [text "Calcuweightor2"] ] 
-    , input  [ value model.workWeight, onInput Input] []
-    , button [ onClick Reset ] [ text "GG"]
-    , viewValidation model
+    [ div [class "banner"] [h1 [] [text "Calcuweightor2"] ] 
+    , div [class "main" ] [input  [ value model.workWeight, onInput Input] []
+    , viewValidation model ]
     ]
     
 
@@ -55,11 +51,14 @@ viewValidation model =
     Just weight ->
       if weight < 45 then 
         div [style "color" "red" ] [ text "Work weight must be at least 45"]
+
       else if not (twoPointFiveDivides model.workWeight) then
-        div [style "color" "red" ] [ text "Work weight must be a multipul of 2.5"]
+        div [style "color" "red" ] [ text "Work weight must be a multiple of 2.5"]
+
       else 
         calcuweightWarmups weight
 
+-- TODO: Maybe refactor this 
 twoPointFiveDivides : String -> Bool
 twoPointFiveDivides s = 
   if String.contains "." s then 

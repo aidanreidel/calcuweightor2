@@ -1,0 +1,61 @@
+* {
+
+    font-family: arial, sans-serif;
+    box-sizing: border-box;
+}
+
+.banner {
+    color:#ffffff;
+    background-color:#566e10;
+    padding:15px;
+    text-align:center;
+}
+
+.container {
+    overflow: hidden;
+}
+
+.howtouse , .options, .main{
+    padding-bottom: 99999px;
+    padding-left: .5%;
+    padding-right: .5%;
+    margin-bottom: -99999px;
+}
+
+.howtouse, .options {
+    background: #e5e5e5;
+    float: left;
+    display: block;
+    width: 20%;
+}
+
+.main {
+    text-align:center;
+    float: left;
+    display: block;
+    width: 100%;
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+@media only screen and (max-width: 800px) {
+    .main, .howtouse, .options {
+        width: 100%;
+        padding-bottom: 0px;
+        margin-bottom: 0px;
+    }
+}
+
