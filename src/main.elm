@@ -39,40 +39,52 @@ update msg model =
 view : Model -> Html Msg
 view model = 
     div []
-    [ input  [ value model.workWeight, onInput Input] []
+    [ div [class "Header"] [h1 [] [text "Calcuweightor2"] ] 
+    , input  [ value model.workWeight, onInput Input] []
     , button [ onClick Reset ] [ text "GG"]
     , viewValidation model
     ]
+    
 
 viewValidation : Model -> Html msg
-viewValidation model = 
-  case String.toInt( model.workWeight ) of
+viewValidation model =
+  case String.toFloat( model.workWeight ) of
     Nothing -> 
       div [style "color" "red" ] [ text "Work weight must be a number"]
     
     Just weight ->
       if weight < 45 then 
         div [style "color" "red" ] [ text "Work weight must be at least 45"]
+      else if not (twoPointFiveDivides model.workWeight) then
+        div [style "color" "red" ] [ text "Work weight must be a multipul of 2.5"]
       else 
         calcuweightWarmups weight
 
-calcuweightWarmups : Int -> Html msg
+twoPointFiveDivides : String -> Bool
+twoPointFiveDivides s = 
+  if String.contains "." s then 
+    (String.endsWith ".5" s) && (endsWith2or7 s) 
+  else 
+    ( String.right 1 s ) == "0" || (String.right 1 s ) == "5"
+
+endsWith2or7 : String -> Bool
+endsWith2or7 = 
+  (\n -> n == "2" || n == "7" ) << String.right 1 << String.dropRight 2
+
+calcuweightWarmups : Float -> Html msg
 calcuweightWarmups weight = 
   div [ class "container" ] 
     [ div [ class "warmup" ] [ text "Warm Up 3:\t", text ( String.fromInt ( warmUpWeight weight 1 )) ]
     , div [ class "warmup" ] [ text "Warm Up 4:\t", text ( String.fromInt ( warmUpWeight weight 2 )) ]
     , div [ class "warmup" ] [ text "Warm Up 5:\t", text ( String.fromInt ( warmUpWeight weight 3 )) ]
-    , div [ class "workset" ] [ text "Work Sets:\t", text ( String.fromInt weight ) ] ]
+    , div [ class "workset" ] [ text "Work Sets:\t", text ( String.fromFloat weight ) ] ]
 
-warmUpWeight : Int -> Int -> Int
+warmUpWeight : Float -> Float -> Int
 warmUpWeight x y =
-  round5 ( y * ( ( x - 45 ) // 4 ) + 45 )
+  round5(y * ( ( x - 45 ) / 4 ) + 45 )
 
-round5 : Int -> Int
+
+round5 : Float -> Int
 round5 x = 
-  if modBy 5 x < 2 then
-    x - ( 5 - ( modBy 5 x ) )
-  else 
-    x + ( 5 - ( modBy 5 x ) )
-
+  round( x / 5 ) * 5
 
