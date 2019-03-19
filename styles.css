@@ -52,7 +52,7 @@ tr:nth-child(even) {
     background-color: #dddddd;
 }
 */
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 1200px) {
     .main, .howtouse, .options {
         width: 100%;
         padding-bottom: 0px;
