@@ -132,10 +132,10 @@ plateStack w ps =
     [] -> ""
     p::psPrime -> 
       if w - p > 0 then 
-        String.fromFloat(w) ++ ", " ++ (plateStack (w-p) ps)
+        String.fromFloat(p) ++ ", " ++ (plateStack (w-p) ps)
 
       else if w - p == 0 then
-        String.fromFloat(w)
+        String.fromFloat(p)
 
       else 
         plateStack w psPrime
