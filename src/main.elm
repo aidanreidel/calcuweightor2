@@ -37,8 +37,15 @@ view : Model -> Html Msg
 view model = 
     div []
     [ div [class "banner"] [h1 [] [text "Calcuweightor2"] ] 
-    , div [class "main" ] [input  [ value model.workWeight, onInput Input] []
-    , viewValidation model ]
+    , div [class "main" ] 
+      [ table [] 
+        [ tr [] 
+          [ td [] [ text "Enter your workweight:"]
+          , td [] [ input  [ value model.workWeight, onInput Input] [] ]
+          ]
+        ]
+      , viewValidation model 
+      ]
     ]
     
 
@@ -62,9 +69,10 @@ viewValidation model =
 twoPointFiveDivides : String -> Bool
 twoPointFiveDivides s = 
   if String.contains "." s then 
-    (String.endsWith ".5" s) && (endsWith2or7 s) 
+    (String.endsWith ".5" s) && (endsWith2or7 s)
   else 
-    ( String.right 1 s ) == "0" || (String.right 1 s ) == "5"
+    ( String.endsWith "0" s ) || ( String.endsWith "5" s )
+  
 
 endsWith2or7 : String -> Bool
 endsWith2or7 = 
@@ -99,12 +107,14 @@ tableRow s w =
 
 warmUpWeight : Float -> Float -> Float
 warmUpWeight x y =
-  round5( y * ( ( x - 45 ) / 4 ) + 45 )
+  roundToNearest 5 ( y * ( ( x - 45 ) / 4 ) + 45 )
 
-round5 : Float -> Float
-round5 x = 
-  toFloat( round( x / 5 ) * 5 )
+{- I just think this is a neat function -}
+roundToNearest : Float -> Float -> Float
+roundToNearest y x = 
+  toFloat( round( x / y ) ) * y
 
+{- This removes the bar and half of the weight as that will be mirrored in practice -}
 plates : Float -> List Float -> String
 plates x ps =
   plateStack ( ( x - 45 ) / 2 ) ps
