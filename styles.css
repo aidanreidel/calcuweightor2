@@ -8,26 +8,16 @@
     background-color:#566e10;
     padding:15px;
     text-align:center;
+    font-size: 1.2vw;
 }
 
 .container {
     overflow: hidden;
 }
 
-.howtouse , .options, .main{
+.main {
     padding-left: .5%;
     padding-right: .5%;
-/*
-    padding-bottom: 99999px;
-    margin-bottom: -99999px;
-*/
-}
-
-.howtouse, .options {
-    background: #e5e5e5;
-    float: left;
-    display: block;
-    width: 20%;
 }
 
 .main {
@@ -37,16 +27,17 @@
     width: 100%;
 }
 table {
+    font-size: 2vmin;
     border-collapse: collapse;
     width: 50%;
     margin-left: auto;
     margin-right: auto;
-}
+    border-top: 1px solid #dddddd; 
+    border-bottom: 1px solid #dddddd; 
+    table-layout: fixed;
 
+}
 td, th {
-/*
-    border: 1px solid #dddddd; 
-*/
     text-align: left;
     padding: 8px;
 }
@@ -59,13 +50,17 @@ td:last-child {
     text-align: right;
 }
 
-@media only screen and (max-width: 1200px) {
-    .main, .howtouse, .options {
+@media only screen and (max-width: 800px) {
+    .main {
         width: 100%;
         padding-bottom: 0px;
         margin-bottom: 0px;
     }
+    .banner {
+        font-size: 3vw;
+    }
     table {
+        font-size: 4vw;
         width: 100%;
     }
 }
