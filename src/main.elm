@@ -74,42 +74,56 @@ calcuweightWarmups : Float -> Html msg
 calcuweightWarmups weight = 
   div [ class "container" ] 
   [ table [] 
-      [ tr []
 {--
+      [ tr []
         [ td [] []
         , td [] [ text "Weight" ]  
         , td [] [ text "Plates" ]
         ]
-      , tr []
+      , 
 --}
-        [ td [] [ text "Warm up 1:"]
-        , td [] [text (String.fromInt ( warmUpWeight weight 1 ) ) ]
-        , td [] []
-        ]
-      , tr []        
-        [ td [] [ text "Warm up 2:"]
-        , td [] [text (String.fromInt ( warmUpWeight weight 2 ) )] 
-        , td [] []
-        ]
-      , tr []        
-        [ td [] [ text "Warm up 3:"]
-        , td [] [text (String.fromInt ( warmUpWeight weight 3 ) )] 
-        , td [] []
-        ]
-      , tr []        
-        [ td [] [ text "Work sets:"]
-        , td [] [text ( String.fromFloat weight )] 
-        , td [] []
-        ]
+      [ tableRow "Warm up 1:" ( warmUpWeight weight 1 )
+      , tableRow "Warm up 2:" ( warmUpWeight weight 2 )
+      , tableRow "Warm up 3:" ( warmUpWeight weight 3 )
+      , tableRow "Work sets:" weight 
       ]
   ]
 
-warmUpWeight : Float -> Float -> Int
+tableRow : String -> Float -> Html msg
+tableRow s w = 
+  tr []        
+        [ td [] [ text s ]
+        , td [] [ text ( String.fromFloat w )] 
+        , td [] [ text ( plates w regularPlates )]
+        ]
+
+warmUpWeight : Float -> Float -> Float
 warmUpWeight x y =
-  round5(y * ( ( x - 45 ) / 4 ) + 45 )
+  round5( y * ( ( x - 45 ) / 4 ) + 45 )
 
-
-round5 : Float -> Int
+round5 : Float -> Float
 round5 x = 
-  round( x / 5 ) * 5
+  toFloat( round( x / 5 ) * 5 )
 
+plates : Float -> List Float -> String
+plates x ps =
+  plateStack ( ( x - 45 ) / 2 ) ps
+
+{- Not allowed to pattern match on floats so we will use an if -}
+plateStack : Float -> List Float -> String 
+plateStack x ps =
+  case ps of 
+    [] -> ""
+    a::ys -> 
+      if x - a > 0 then 
+        String.fromFloat(a) ++ ", " ++ (plateStack (x-a) ps)
+      else if x - a == 0 then
+        String.fromFloat(a)
+      else 
+        plateStack x ys
+              
+regularPlates : List Float
+regularPlates = [45,35,25,10,5,2.5,1.25]
+
+oylmpicPlates : List Float
+oylmpicPlates = 55::regularPlates
