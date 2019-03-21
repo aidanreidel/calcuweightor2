@@ -136,7 +136,7 @@ plateStack w ps =
       if w - p > 0 then 
         String.fromFloat(p) ++ ", " ++ (plateStack (w-p) ps)
 
-      else if w - p == 0 then -- Seperated out this 
+      else if w - p == 0 then -- Seperated out this to avoid dangling ","
         String.fromFloat(p)
 
       else 
