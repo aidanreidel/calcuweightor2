@@ -44,13 +44,14 @@ view model =
           , td [] [ input  [ value model.workWeight, onInput Input] [] ]
           ]
         ]
-      , viewValidation model 
+      , inputValidation model 
       ]
     ]
     
-{- Validates data and displays a relevant error or processes the data! -}
-viewValidation : Model -> Html msg
-viewValidation model =
+{- Validates data and displays a relevant error message 
+  or sends the data off to be processed! -}
+inputValidation : Model -> Html msg
+inputValidation model =
   case String.toFloat( model.workWeight ) of
     Nothing -> 
       div [style "color" "red" ] [ text "Work weight must be a number"]
@@ -75,7 +76,8 @@ twoPointFiveDivides s =
   else 
     endsWithOneOf ["0", "5"] s  
 
-{- A way of checking if a string ends eith one of a list of chars -}
+{- A way of checking if a string ends with at least one of the input
+  list of strings -}
 endsWithOneOf :  List String -> String -> Bool
 endsWithOneOf ls s = 
   List.foldr (\n m -> ( String.endsWith n s ) || m ) False ls
@@ -134,7 +136,7 @@ plateStack w ps =
       if w - p > 0 then 
         String.fromFloat(p) ++ ", " ++ (plateStack (w-p) ps)
 
-      else if w - p == 0 then
+      else if w - p == 0 then -- Seperated out this 
         String.fromFloat(p)
 
       else 
